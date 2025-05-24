@@ -1,78 +1,106 @@
-
 # WHMCS-Database-Structure-Fixer
 
 **🔧 A WHMCS MySQL Repair & Optimization Tool**
-**✍️ by [Shahid Malla](https://shahidmalla.dev) – 📧 [life@shahidmalla.dev](mailto:life@shahidmalla.dev)**
+**✍️ Written by [Shahid Malla](https://shahidmalla.dev) – 📧 [life@shahidmalla.dev](mailto:life@shahidmalla.dev)**
 
 ---
 
 ## 📌 Overview
 
-**WHMCS-Database-Structure-Fixer** is a robust PHP-based tool designed to fix structural and integrity issues in WHMCS MySQL databases. This includes handling common MySQL errors such as:
+**WHMCS-Database-Structure-Fixer** is a robust PHP-based utility designed to detect and repair common structural problems in your WHMCS MySQL database. It helps resolve:
 
-* `Integrity constraint violation: 1062 Duplicate entry '0' for key`
-* `SQLSTATE[23000]: Integrity constraint violation: Duplicate entry '1' for key 'tblconfiguration.PRIMARY'`
-* And many more similar database-level issues.
+* 🔁 **Duplicate entry** errors (`1062 Duplicate entry '0' for key`)
+* ❌ **Primary key conflicts** (`Duplicate entry '1' for key 'tblconfiguration.PRIMARY'`)
+* 🧱 **Constraint violations**
+* 💥 **Emergency database crashes**
 
 ---
 
-## 📋 Usage Instructions
+## ⚙️ Setup Instructions
 
-### 🖥️ Command Line
+### 1. 🔽 **Download and Save the Script**
 
-1. **Save the script** as `whmcs_db_fixer.php`
-2. **Upload** to the root directory of your WHMCS installation.
-3. **Run it using one of the modes below:**
+Save the PHP script as:
 
 ```bash
-# 🔧 Normal execution
+whmcs_db_fixer.php
+```
+
+Place it in the **root directory of your WHMCS installation**.
+
+---
+
+### 2. ✏️ **Edit Database Connection Settings**
+
+Open `whmcs_db_fixer.php` in any code editor and **update the following section** with your actual WHMCS database credentials:
+
+```php
+$emergencyFixer = new WHMCSDBFixer([
+    'host' => 'localhost',
+    'username' => 'shahidmaladbusername',
+    'password' => 'shahidmallapassword',
+    'database' => 'shahidmalladb',
+    'dry_run' => false,
+    'verbose' => true,
+    'max_retries' => 3,
+]);
+```
+
+> 📁 You can find your real database login details inside your WHMCS `configuration.php` file (located in your WHMCS root directory).
+
+---
+
+## 🚀 Usage
+
+### 🖥️ Command Line Options
+
+```bash
+# 🔧 Run normally
 php whmcs_db_fixer.php
 
-# 🧪 Dry run (no actual changes made)
+# 🧪 Test mode (no changes made)
 php whmcs_db_fixer.php --dry-run
 
-# ⚡ Quick fix (core WHMCS tables only)
+# ⚡ Quick fix for essential WHMCS tables
 php whmcs_db_fixer.php --quick-fix
 
-# 🚨 Emergency mode (for broken or corrupted DBs)
+# 🚨 Emergency repair mode
 php whmcs_db_fixer.php --emergency
 
-# 🤫 Silent mode (minimal output)
+# 🤫 Silent operation (no output)
 php whmcs_db_fixer.php --silent
 ```
 
 ---
 
-### 🌐 Web Browser
+### 🌐 Web Interface
 
-Upload the file to your server and visit:
+Just access the file in your browser after uploading:
 
-```text
+```
 https://yourdomain.com/whmcs_db_fixer.php
 ```
 
 ---
 
-## 🚀 Features
+## 🔑 Key Features
 
-* ✅ **Auto-reconnects** to handle `MySQL server has gone away` errors
-* 🔁 **Retry mechanism**: Attempts up to 5 times for failed queries
-* 📦 **Batch processing** to avoid memory/time overloads
-* 🛠️ **Emergency recovery** mode for critical issues
-* 📊 **Progress tracking** with percent completion
-* 💾 **Automatic backups** before destructive changes
-* 🧾 **Detailed logs** for all operations
-* 📄 **Professional HTML reports** generated after execution
+* ✅ **Auto-reconnect** for `MySQL server has gone away` errors
+* 🔁 **Retry logic** (up to 5 times)
+* 🧹 **Batch-based processing** to avoid timeouts
+* 💾 **Automatic backups** before data modifications
+* 🛠️ **Emergency fixer** mode for critical DB failures
+* 📊 **Progress tracker** in CLI or browser
+* 🧾 **Detailed logs and HTML report output**
 
 ---
 
-## 🧯 Solves Issues Like:
+## 🛠️ Fixes Common WHMCS Errors Like:
 
-* **Duplicate entry errors**
-* **Corrupt or missing primary keys**
-* **Invalid constraints**
-* **Misconfigured `tblconfiguration` data**
-* **Broken foreign key links**
+* `Integrity constraint violation: 1062 Duplicate entry`
+* `SQLSTATE[23000]: Integrity constraint violation`
+* `Duplicate entry '0' for key`
+* `Duplicate entry '1' for key 'tblconfiguration.PRIMARY'`
 
 ---
 
@@ -86,5 +114,5 @@ https://yourdomain.com/whmcs_db_fixer.php
 
 ## ⚠️ Disclaimer
 
-> **Use at your own risk!** Always back up your database before running repair scripts. This tool is intended for developers and system administrators who understand the risks of database modification.
-
+> 💡 **Always take a full backup of your WHMCS database before using this tool!**
+> This tool is intended for developers and system administrators familiar with WHMCS and MySQL operations. Improper usage may result in data loss.
