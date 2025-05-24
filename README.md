@@ -1,7 +1,7 @@
 # WHMCS-Database-Structure-Fixer
 
 **🔧 A WHMCS MySQL Repair & Optimization Tool**
-**✍️ Written by [Shahid Malla](https://shahidmalla.dev) – 📧 [life@shahidmalla.dev](mailto:life@shahidmalla.dev)**
+**  by [Shahid Malla](https://shahidmalla.dev) – 📧 [life@shahidmalla.dev](mailto:life@shahidmalla.dev)**
 
 ---
 
